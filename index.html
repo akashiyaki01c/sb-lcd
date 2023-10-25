@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>西武LCD</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=BIZ+UDGothic:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+	<div id="stvs-main"></div>
+	<script type="module">
+		import { STVS } from "./stvs.js";
+		import { TYPE } from "./data/type.js";
+
+		const stvs = new STVS("stvs-main", {});
+		stvs.draw({
+			nextStation: {
+				rowDest: {
+					type: TYPE["06"],
+					sta: {
+						nameJa: "西武新宿",
+						nameEn: "Seibu-Shinjuku",
+					},
+					carValue: "６",
+				},
+				rowNext: {
+					nameJa: "東大和市",
+					nameKana: "　ひがしやまとし",
+					nameEn: "　Higashi-Yamatoshi",
+					nameKanaScale: 7 / 8,
+					nameEnScale: 0.75,
+					nextStr: "まもなく",
+					stationNumber: {
+						route: "SS",
+						station: "01",
+						color: "#f00",
+					}
+				}
+			}
+		});
+	</script>
+</body>
+</html>
