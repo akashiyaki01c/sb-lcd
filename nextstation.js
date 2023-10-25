@@ -30,7 +30,7 @@ export class NextStation {
 		this.#element.innerHTML = `
 			<div id="${this.#id}-row-dest"></div>
 			<div id="${this.#id}-row-next"></div>
-			<div id="${this.#id}-bottom-line" style="width: 100%; height: 1vw; background-color: red;"></div>
+			<div id="${this.#id}-bottom-line" style="width: 100%; height: 1vw; background: linear-gradient(to bottom, #1FC4F4, #1FC4F4 30%, #4DB857 36%, #4DB857 64%, #007AC1 70%, #007AC1);"></div>
 		`;
 	}
 
@@ -67,7 +67,7 @@ export class RowDest {
 		this.#element.style.height = "32%";
 		this.#element.style.display = "flex";
 		this.#element.style.justifyContent = "space-between";
-		this.#element.style.font = "4vw/1 'Roboto', 'Source Han Sans'";
+		this.#element.style.font = "600 4vw/1 'Roboto', 'Source Han Sans'";
 		this.#element.style.padding = "0.5%";
 		this.#element.innerHTML = `
 			<div id="${this.#id}-dest" style="display: flex; gap: 1.5vw;">
@@ -135,6 +135,7 @@ export class DestType {
 			v.style.transformOrigin = "left";
 			v.style.transform = "translate(-50%, -50%)";
 			v.style.fontWeight = "500";
+			v.style.textShadow = "0.05em 0.05em 0 #4447";
 		})
 		document.querySelector(`#${this.#id}-inner-en`).style.opacity = "0.0";
 	}
@@ -144,9 +145,12 @@ export class DestType {
 		this.#element.style.color = option.color;
 		this.#element.style.border = `0.1em solid ${option.backgroundColor[1]}`;
 		this.#innerElementJa.innerHTML = option.nameJa;
-		this.#innerElementJa.style.transform = `scaleX(${option.nameJaScale || 1}) translate(-50%, -50%)`;
+		this.#innerElementJa.style.transform = `scaleX(${option.nameJaScale || 1}) translate(-50%, -50%) translateY(0.12em) translateX(${option.nameJaLetterSpacingEm/2 || 0}em)`;
+		this.#innerElementJa.style.fontSize = "0.85em";
+		this.#innerElementJa.style.letterSpacing = `${option.nameJaLetterSpacingEm || 0}em`;
 		this.#innerElementEn.innerHTML = option.nameEn;
-		this.#innerElementEn.style.transform = `scaleX(${option.nameEnScale || 1}) translate(-50%, -50%)`;
+		this.#innerElementEn.style.transform = `scaleX(${option.nameEnScale || 1}) translate(-50%, -50%) translate(0px, 0.12em)`;
+		this.#innerElementEn.style.fontSize = "0.85em";
 	}
 
 	changeLang() {
@@ -198,12 +202,16 @@ export class DestSta {
 		this.#element.style.height = `1em`;
 		this.#element.style.padding = "0.1em";
 		this.#element.style.position = "relative";
-		this.#element.style.fontWeight = "500";
+		this.#element.style.color = "#444";
 		this.#element.innerHTML = `
 			<div id="${this.#id}-inner-ja" style="position: absolute;"></div>
 			<div id="${this.#id}-inner-en" style="position: absolute;"></div>
 		`;
+		document.querySelector(`#${this.#id}-inner-ja`).style.transform = "translate(0px, 0.12em)";
+		document.querySelector(`#${this.#id}-inner-en`).style.transform = "translate(0px, 0.12em)";
 		document.querySelector(`#${this.#id}-inner-en`).style.opacity = "0.0";
+		document.querySelector(`#${this.#id}-inner-en`).style.fontSize = "0.85em";
+		document.querySelector(`#${this.#id}-inner-ja`).style.fontSize = "0.85em";
 	}
 
 	draw(option) {
@@ -263,9 +271,9 @@ export class RowNext {
 			</div>
 			<div id="${this.#id}-number" style="aspect-ratio: 1/1; height: 100%;"></div>
 			<div id="${this.#id}-staname" style="width: 6em; height: 100%; position: relative;">
-				<div id="${this.#id}-staname-ja" style="position: absolute; left: 50%; transform: translateX(-50%); white-space: nowrap;"></div>
-				<div id="${this.#id}-staname-kana" style="position: absolute; left: 50%; transform: translateX(-50%); white-space: nowrap; "></div>
-				<div id="${this.#id}-staname-en" style="position: absolute; left: 50%; transform: translateX(-50%); white-space: nowrap;"></div>
+				<div id="${this.#id}-staname-ja" style="font-size: 0.85em; position: absolute; left: 50%; transform: translateX(-50%); white-space: nowrap;"><span style="display: block;"></span></div>
+				<div id="${this.#id}-staname-kana" style="font-size: 0.85em; position: absolute; left: 50%; transform: translateX(-50%); white-space: nowrap; "><span style="display: block; opacity: 0;"></span></div>
+				<div id="${this.#id}-staname-en" style="font-size: 0.85em; position: absolute; left: 50%; transform: translateX(-50%); white-space: nowrap;"><span style="display: block; opacity: 0;"></span></div>
 			</div>
 			<div></div>
 		`;
@@ -273,12 +281,12 @@ export class RowNext {
 	}
 
 	draw(option) {
-		document.querySelector(`#${this.#id}-staname-ja`).innerHTML = `<span style="display: block;">${option.nameJa || ""}</span>`;
-		document.querySelector(`#${this.#id}-staname-ja`).style.transform = `translateX(-50%) scaleX(${option.nameJaScale || 1})`;
-		document.querySelector(`#${this.#id}-staname-kana`).innerHTML = `<span style="display: block; opacity: 0;">${option.nameKana || ""}</span>`;
-		document.querySelector(`#${this.#id}-staname-kana`).style.transform = `translateX(-50%) scaleX(${option.nameKanaScale || 1})`;
-		document.querySelector(`#${this.#id}-staname-en`).innerHTML = `<span style="display: block; opacity: 0;">${option.nameEn || ""}</span>`;
-		document.querySelector(`#${this.#id}-staname-en`).style.transform = `translateX(-50%) scaleX(${option.nameEnScale || 1})`;
+		document.querySelector(`#${this.#id}-staname-ja>span`).innerHTML = `${option.name.ja || ""}`;
+		document.querySelector(`#${this.#id}-staname-ja`).style.transform = `translateX(-50%) translateY(0.1em) scaleX(${option.name.jaScale || 1})`;
+		document.querySelector(`#${this.#id}-staname-kana>span`).innerHTML = `${option.name.kana || ""}`;
+		document.querySelector(`#${this.#id}-staname-kana`).style.transform = `translateX(-50%) translateY(0.1em) scaleX(${option.name.kanaScale || 1})`;
+		document.querySelector(`#${this.#id}-staname-en>span`).innerHTML = `${option.name.en || ""}`;
+		document.querySelector(`#${this.#id}-staname-en`).style.transform = `translateX(-50%) translateY(0.1em) scaleX(${option.name.enScale || 1})`;
 		document.querySelector(`#${this.#id}-soon>div`).innerHTML = option.nextStr || "";
 		this.#stationNumber.draw(option.stationNumber);
 	}
@@ -291,23 +299,29 @@ export class RowNext {
 		switch (this.#nowLang) {
 			case "ja":
 				ja = document.querySelector(`#${this.#id}-staname-ja>span`).animate(off, option);
-				kana = document.querySelector(`#${this.#id}-staname-kana>span`).animate(on, option);
 				ja.commitStyles();
-				kana.commitStyles();
+				setTimeout(() => {
+					kana = document.querySelector(`#${this.#id}-staname-kana>span`).animate(on, option);				
+					kana.commitStyles();	
+				}, 100);
 				this.#nowLang = "kana";
 				break;
 			case "kana":
 				kana = document.querySelector(`#${this.#id}-staname-kana>span`).animate(off, option);
-				en = document.querySelector(`#${this.#id}-staname-en>span`).animate(on, option);
 				kana.commitStyles();
-				en.commitStyles();
+				setTimeout(() => {
+					en = document.querySelector(`#${this.#id}-staname-en>span`).animate(on, option);				
+					en.commitStyles();	
+				}, 100);
 				this.#nowLang = "en";
 				break;
 			case "en":
 				en = document.querySelector(`#${this.#id}-staname-en>span`).animate(off, option);
-				ja = document.querySelector(`#${this.#id}-staname-ja>span`).animate(on, option);
-				ja.commitStyles();
 				en.commitStyles();
+				setTimeout(() => {
+					ja = document.querySelector(`#${this.#id}-staname-ja>span`).animate(on, option);				
+					ja.commitStyles();	
+				}, 100);
 				this.#nowLang = "ja";
 				break;
 		}
@@ -333,7 +347,7 @@ export class StationNumber {
 		this.#element.innerHTML = `
 			<div id="${this.#id}-inner">
 				<div id="${this.#id}-inner-route" style="height: 40%; width: 100%; background-color: #f77;">
-					<div style="transform: translateY(-2px);"></div>
+					<div style="transform: translateY(-0.1em);"></div>
 				</div>
 				<div id="${this.#id}-inner-sta" style="font-size: 1.5em;"></div>
 			</div>
@@ -354,9 +368,12 @@ export class StationNumber {
 	}
 
 	draw(option) {
-		this.#element.style.backgroundColor = option.color;
-		document.querySelector(`#${this.#id}-inner-route`).style.backgroundColor = option.color;
+		this.#element.style.backgroundColor = option.backgroundColor;
+		this.#element.style.color = option.color;
+		document.querySelector(`#${this.#id}-inner-route`).style.backgroundColor = option.backgroundColor;
+		document.querySelector(`#${this.#id}-inner-route`).style.color = option.color;
 		document.querySelector(`#${this.#id}-inner-route>div`).innerHTML = option.route || "";
 		document.querySelector(`#${this.#id}-inner-sta`).innerHTML = option.station || "";
+		document.querySelector(`#${this.#id}-inner-sta`).style.color = "#000";
 	}
 }

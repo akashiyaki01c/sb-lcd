@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   id="svg2"
+   width="1100"
+   height="755.15289"
+   inkscape:version="0.92.2 (5c3e80d, 2017-08-06)"
+   sodipodi:docname="拝島ライナー.svg">
+  <metadata
+     id="metadata8">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs6">
+    <clipPath
+       id="clipPath831"
+       clipPathUnits="userSpaceOnUse">
+      <path
+         inkscape:connector-curvature="0"
+         id="path829"
+         d="M 0,612.288 H 858.897 V 0 H 0 Z" />
+    </clipPath>
+  </defs>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1366"
+     inkscape:window-height="705"
+     id="namedview4"
+     showgrid="false"
+     fit-margin-top="50"
+     fit-margin-left="50"
+     fit-margin-right="50"
+     fit-margin-bottom="50"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:zoom="0.417193"
+     inkscape:cx="370.01029"
+     inkscape:cy="229.46149"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2" />
+  <g
+     id="g1627"
+     transform="matrix(4.9632795,0,0,4.9632795,-356.9889,-833.35997)"
+     inkscape:export-xdpi="272.07535"
+     inkscape:export-ydpi="272.07535"
+     inkscape:export-filename="C:\Users\owner\Pictures\制作物\駅ナンバリング\西武鉄道\列車ロゴ\拝島ライナーロゴ.png">
+    <g
+       style="fill:#0173bc;fill-opacity:1"
+       transform="matrix(26.424257,0,0,-26.424257,256.07773,177.97909)"
+       id="g3977">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3979"
+         style="fill:#0173bc;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         d="M 0,0 C -0.362,0 -0.763,-0.293 -0.896,-0.656 L -1.513,-2.354 H -2.84 l 0.576,1.575 c 0.112,0.302 0.356,0.568 0.644,0.732 L -1.602,0 h -0.509 c -0.364,0 -0.765,-0.293 -0.896,-0.656 l -1.196,-3.283 h -0.4 c -0.261,0 -0.437,-0.136 -0.525,-0.384 l -0.247,-0.671 h 0.918 c 0.364,0 0.766,0.295 0.898,0.658 l 0.524,1.442 h 1.325 l -0.763,-2.1 h 0.657 c 0.361,0 0.763,0.295 0.897,0.658 l 1.294,3.554 c 0.109,0.302 0.356,0.571 0.644,0.735 L 1.037,0 Z" />
+    </g>
+    <g
+       style="fill:#8ec220;fill-opacity:1"
+       transform="matrix(26.424257,0,0,-26.424257,158.00409,178.0322)"
+       id="g3981">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3983"
+         style="fill:#8ec220;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         d="m 0,0 c -0.29,0 -0.524,-0.234 -0.524,-0.522 0,-0.29 0.234,-0.524 0.524,-0.524 0.288,0 0.522,0.234 0.522,0.524 C 0.522,-0.234 0.288,0 0,0" />
+    </g>
+    <g
+       style="fill:#8ec220;fill-opacity:1"
+       transform="matrix(26.424257,0,0,-26.424257,131.99469,229.86074)"
+       id="g3985">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3987"
+         style="fill:#8ec220;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         d="m 0,0 -0.277,-0.76 h -0.132 c -0.362,0 -0.761,-0.295 -0.896,-0.657 l -0.587,-1.615 h 0.954 l 0.338,0.926 c 0.076,0.214 0.317,0.39 0.533,0.394 H 0.331 L 1.192,0.657 H 0.896 C 0.534,0.657 0.133,0.362 0,0" />
+    </g>
+  </g>
+</svg>

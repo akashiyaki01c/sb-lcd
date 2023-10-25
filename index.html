@@ -10,36 +10,67 @@
 </head>
 <body>
 	<div id="stvs-main"></div>
+	<form>
+		<div>
+			<fieldset>
+				<legend>列情設定</legend>
+				<div><label for="form-trainfo-type">種別</label><input type="number" name="form-trainfo-type" id="form-trainfo-type" min="0" max="99" value="02"><span id="form-trainfo-type-error"></span></div>
+				<div><label for="form-trainfo-start">始発駅</label><input type="number" name="form-trainfo-start" id="form-trainfo-start" min="0" max="999" value="100"></div>
+				<div><label for="form-trainfo-dest">行先駅</label><input type="number" name="form-trainfo-dest" id="form-trainfo-dest" min="0" max="999" value="100"><span id="form-trainfo-dest-error"></span></div>
+			</fieldset>
+			
+		</div>
+	</form>
 	<script type="module">
 		import { STVS } from "./stvs.js";
 		import { TYPE } from "./data/type.js";
+		import { DEST } from "./data/dest.js";
 
 		const stvs = new STVS("stvs-main", {});
+		const rowNext = {
+			name: {
+				ja: "東大和市",
+				kana: "　ひがしやまとし",
+				en: "　Higashi-Yamatoshi",
+				kanaScake: 1,
+				enScale: 0.85,
+			},
+			nextStr: "まもなく",
+			stationNumber: {
+				route: "SS",
+				station: "32",
+				backgroundColor: "#00a6b4",
+				color: "white",
+			}
+		}
 		stvs.draw({
 			nextStation: {
 				rowDest: {
-					type: TYPE["06"],
-					sta: {
-						nameJa: "西武新宿",
-						nameEn: "Seibu-Shinjuku",
-					},
+					type: TYPE["02"],
+					sta: DEST["100"],
 					carValue: "６",
 				},
-				rowNext: {
-					nameJa: "東大和市",
-					nameKana: "　ひがしやまとし",
-					nameEn: "　Higashi-Yamatoshi",
-					nameKanaScale: 7 / 8,
-					nameEnScale: 0.75,
-					nextStr: "まもなく",
-					stationNumber: {
-						route: "SS",
-						station: "01",
-						color: "#f00",
-					}
-				}
+				rowNext
 			}
 		});
+		document.querySelector("#form-trainfo-type").onchange = document.querySelector("#form-trainfo-dest").onchange = () => {
+			const typeId = document.querySelector("#form-trainfo-type").value.padStart(2, "0");
+			const destId = document.querySelector("#form-trainfo-dest").value.padStart(3, "0");
+			console.log(typeId, destId)
+			document.querySelector("#form-trainfo-type-error").innerHTML = TYPE[typeId] == null ? "種別が存在しません。" : "";
+			document.querySelector("#form-trainfo-dest-error").innerHTML = DEST[destId] == null ? "行先が存在しません。" : "";
+			
+			stvs.draw({
+				nextStation: {
+					rowDest: {
+						type: TYPE[typeId],
+						sta: DEST[destId],
+						carValue: "６",
+					},
+					rowNext
+				}
+			});
+		}
 	</script>
 </body>
 </html>
