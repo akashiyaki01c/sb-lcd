@@ -246,7 +246,7 @@ export class RowNext {
 	#id = null;
 	#element = null;
 	#option = {};
-	#nowLang = "ja";
+	#nowLangIndex = 0;
 	#stationNumber = null;
 
 	constructor(id, option) {
@@ -295,36 +295,20 @@ export class RowNext {
 		const off = [ {transform: "translateY(0) rotate3d(1, 0, 0, 0deg)", opacity: "1"}, {transform: "translateY(0.4em) rotate3d(1, 0, 0, 90deg)", opacity: "0"} ];
 		const on = [ {transform: "translateY(-0.4em) rotate3d(1, 0, 0, -90deg)", opacity: "0"}, {transform: "translateY(0) rotate3d(1, 0, 0, 0deg)", opacity: "1"} ];
 		const option = {duration: 500, fill: "forwards"};
-		let ja, kana, en;
-		switch (this.#nowLang) {
-			case "ja":
-				ja = document.querySelector(`#${this.#id}-staname-ja>span`).animate(off, option);
-				ja.commitStyles();
-				setTimeout(() => {
-					kana = document.querySelector(`#${this.#id}-staname-kana>span`).animate(on, option);				
-					kana.commitStyles();	
-				}, 100);
-				this.#nowLang = "kana";
-				break;
-			case "kana":
-				kana = document.querySelector(`#${this.#id}-staname-kana>span`).animate(off, option);
-				kana.commitStyles();
-				setTimeout(() => {
-					en = document.querySelector(`#${this.#id}-staname-en>span`).animate(on, option);				
-					en.commitStyles();	
-				}, 100);
-				this.#nowLang = "en";
-				break;
-			case "en":
-				en = document.querySelector(`#${this.#id}-staname-en>span`).animate(off, option);
-				en.commitStyles();
-				setTimeout(() => {
-					ja = document.querySelector(`#${this.#id}-staname-ja>span`).animate(on, option);				
-					ja.commitStyles();	
-				}, 100);
-				this.#nowLang = "ja";
-				break;
-		}
+
+		const elemArray = [
+			document.querySelector(`#${this.#id}-staname-ja>span`),
+			document.querySelector(`#${this.#id}-staname-kana>span`),
+			document.querySelector(`#${this.#id}-staname-en>span`),
+		];
+		const offIndex = this.#nowLangIndex, onIndex = (this.#nowLangIndex + 1) % elemArray.length;
+		const offAnim = elemArray[offIndex].animate(off, option);
+		offAnim.commitStyles();
+		setTimeout(() => {
+			const onAnim = elemArray[onIndex].animate(on, option);
+			onAnim.commitStyles();
+		}, 150);
+		this.#nowLangIndex = (this.#nowLangIndex + 1) % elemArray.length;
 	}
 }
 
