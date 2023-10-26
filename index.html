@@ -32,13 +32,7 @@
 
 		const stvs = new STVS("stvs-main", {});
 		const rowNext = {
-			name: {
-				ja: "東大和市",
-				kana: "　ひがしやまとし",
-				en: "　Higashi-Yamatoshi",
-				kanaScake: 1,
-				enScale: 0.85,
-			},
+			name: NEXT_STATION["400"],
 			nextStr: "まもなく",
 			stationNumber: {
 				route: "SS",
@@ -68,6 +62,7 @@
 				document.querySelector("#form-trainfo-dest-error").innerHTML = DEST[destId] == null ? "行先が存在しません。" : "";
 				document.querySelector("#form-trainfo-nowpos-error").innerHTML = NEXT_STATION[nowPosId] == null ? "行先が存在しません。" : "";
 				
+				console.log(STATION_NUMBER[nowPosId]);
 				stvs.draw({
 					nextStation: {
 						rowDest: {
@@ -79,8 +74,8 @@
 							name: NEXT_STATION[nowPosId],
 							nextStr: "まもなく",
 							stationNumber: {
-								route: STATION_NUMBER[nowPosId]?.number.slice(0, -2),
-								station: STATION_NUMBER[nowPosId]?.number.slice(-2),
+								route: STATION_NUMBER[nowPosId] != null ? STATION_NUMBER[nowPosId].number.slice(0, -2) : "",
+								station: STATION_NUMBER[nowPosId] != null ? STATION_NUMBER[nowPosId]?.number.slice(-2) : "",
 								backgroundColor: "#00a6b4",
 								color: "white",
 							}

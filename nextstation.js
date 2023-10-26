@@ -26,7 +26,7 @@ export class NextStation {
 		this.#element.style.display = "flex";
 		this.#element.style.flexDirection = "column";
 		this.#element.style.justifyContent = "space-between";
-		this.#element.style.background = "linear-gradient(to bottom, #f7f7f7, #f7f7f7 5%, #eee 15%, #eee 25%, #f7f7f7 35%, #f7f7f7)";
+		this.#element.style.background = "linear-gradient(to bottom, #f7f7f7, #f7f7f7 5%, #e7e7e7 15%, #e7e7e7 25%, #f7f7f7 35%, #f7f7f7)";
 		this.#element.innerHTML = `
 			<div id="${this.#id}-row-dest"></div>
 			<div id="${this.#id}-row-next"></div>
@@ -198,7 +198,7 @@ export class DestSta {
 
 	#initElement() {
 		this.#element.style.width = "fit-content";
-		this.#element.style.minWidth = "10em";
+		this.#element.style.minWidth = "15em";
 		this.#element.style.height = `1em`;
 		this.#element.style.padding = "0.1em";
 		this.#element.style.position = "relative";
@@ -270,23 +270,48 @@ export class RowNext {
 				<div style="width: fit-content; height: 1em; padding-right: 1em;"></div>
 			</div>
 			<div id="${this.#id}-number" style="aspect-ratio: 1/1; height: 100%;"></div>
-			<div id="${this.#id}-staname" style="width: 6em; height: 100%; position: relative;">
+			<div id="${this.#id}-staname" style="padding-left: 0.5em; width: 6em; height: 100%; position: relative;">
 				<div id="${this.#id}-staname-ja" style="font-size: 0.85em; position: absolute; left: 50%; transform: translateX(-50%); white-space: nowrap;"><span style="display: block;"></span></div>
 				<div id="${this.#id}-staname-kana" style="font-size: 0.85em; position: absolute; left: 50%; transform: translateX(-50%); white-space: nowrap; "><span style="display: block; opacity: 0;"></span></div>
 				<div id="${this.#id}-staname-en" style="font-size: 0.85em; position: absolute; left: 50%; transform: translateX(-50%); white-space: nowrap;"><span style="display: block; opacity: 0;"></span></div>
+				<div id="${this.#id}-staname-en-temp" style="font-size: 0.85em; position: absolute; left: 50%; transform: translateX(-50%); white-space: nowrap; opacity: 0;"><span style="display: block; opacity: 0;"></span></div>
 			</div>
 			<div></div>
 		`;
 
 	}
 
+	#getJpCSS(str) {
+		if (str.length >= 8) {
+			return { letterSpacing: "0em", transform: `translateX(-50%) translateY(0.1em) translateX(0.15em) scaleX(calc(7 / ${str.length}))`, }
+		}
+		if (str.length === 2) {
+			return { letterSpacing: "1em", transform: `translateX(-50%) translateY(0.1em) translateX(0.5em) scaleX(1)`, }
+		} else if (str.length === 3) {
+			return { letterSpacing: "0.3em", transform: `translateX(-50%) translateY(0.1em) translateX(0.15em) scaleX(1)`, }
+		} else {
+			return { letterSpacing: "0em", transform: `translateX(-50%) translateY(0.1em) scaleX(1)`, }
+		}
+	}
+
 	draw(option) {
 		document.querySelector(`#${this.#id}-staname-ja>span`).innerHTML = `${option.name.ja || ""}`;
 		document.querySelector(`#${this.#id}-staname-ja`).style.transform = `translateX(-50%) translateY(0.1em) scaleX(${option.name.jaScale || 1})`;
+		for (const css in this.#getJpCSS(option.name.ja)) {
+			document.querySelector(`#${this.#id}-staname-ja`).style[css] = this.#getJpCSS(option.name.ja)[css];
+		}
 		document.querySelector(`#${this.#id}-staname-kana>span`).innerHTML = `${option.name.kana || ""}`;
 		document.querySelector(`#${this.#id}-staname-kana`).style.transform = `translateX(-50%) translateY(0.1em) scaleX(${option.name.kanaScale || 1})`;
+		for (const css in this.#getJpCSS(option.name.kana)) {
+			document.querySelector(`#${this.#id}-staname-kana`).style[css] = this.#getJpCSS(option.name.kana)[css];
+		}
+		
+		document.querySelector(`#${this.#id}-staname-en-temp>span`).innerHTML = `${option.name.en || ""}`;
+		const size = Number.parseFloat(window.getComputedStyle(document.querySelector(`#${this.#id}-staname`)).width.slice(0, -2));
+		const enSize = (document.querySelector(`#${this.#id}-staname-en-temp>span`)).clientWidth;		
 		document.querySelector(`#${this.#id}-staname-en>span`).innerHTML = `${option.name.en || ""}`;
-		document.querySelector(`#${this.#id}-staname-en`).style.transform = `translateX(-50%) translateY(0.1em) scaleX(${option.name.enScale || 1})`;
+		console.log(size / enSize);
+		document.querySelector(`#${this.#id}-staname-en`).style.transform = `translateX(-50%) translateY(0.1em) scaleX(${Math.min(1, size / enSize) || 1})`;
 		document.querySelector(`#${this.#id}-soon>div`).innerHTML = option.nextStr || "";
 		this.#stationNumber.draw(option.stationNumber);
 	}
